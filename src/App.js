@@ -14,10 +14,10 @@ const COUNTRY_DETAILS = `
       code
       name
       native
-      emoji
-      emojiU
       currency
       phone
+      emoji
+      emojiU
       languages {
         code
         name
