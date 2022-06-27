@@ -1,5 +1,6 @@
 import './App.css';
 import React from "react";
+import 'bootstrap/dist/css/bootstrap.css';
 
 //query to get the names of all the countries
 
