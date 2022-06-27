@@ -1,0 +1,32 @@
+.header{
+  text-align: center;
+  color: #bc412b;
+  margin: 3%;
+}
+
+.country-dropdown{
+  text-align: center;
+  display: block;
+  margin: 0 auto;
+  height: 40px;
+  border-radius: 1.5rem;
+  border: none;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  outline: none;
+  color: #2C3639;
+}
+
+.card{
+  margin: 3%;
+  text-align: center;
+  color: #2C3639;
+}
+
+.card span{
+  color: #bc412b;
+}
+
+footer{
+  text-align: center;
+  margin: 2%;
+}
