@@ -1,12 +1,16 @@
 import './App.css';
 import React from "react";
 
+//query to get the names of all the countries
+
 const COUNTRY = `{
   countries {
       name
       code
     }
 }`;
+
+//query to get the details of a specific country
 
 const COUNTRY_DETAILS = `
   query Country($countryCode: ID!) {
@@ -26,6 +30,7 @@ const COUNTRY_DETAILS = `
   }
 `;
 
+
 function App() {
   const [countrydropdown, setCountryDropdown] = React.useState([]);
   const [country, setCountry] = React.useState();
@@ -40,6 +45,8 @@ function App() {
     languages: [{ code: "", name: "" }],
   });
 
+  //fetching the names of the countries from the graphql api using first query
+
   React.useEffect(() => {
     fetch("https://countries.trevorblades.com/graphql/", {
       method: "POST",
@@ -49,6 +56,8 @@ function App() {
       .then((response) => response.json())
       .then((data) => setCountryDropdown(data.data.countries));
   }, []);
+
+  //fetching the details of a country from the graphql api using second query
 
   React.useEffect(() => {
     fetch("https://countries.trevorblades.com/graphql/", {
