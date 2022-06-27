@@ -22,6 +22,10 @@
   color: #2C3639;
 }
 
+.card h6{
+  padding: 0.5%;
+}
+
 .card span{
   color: #bc412b;
 }
