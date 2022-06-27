@@ -2,6 +2,7 @@
 
 A simple web application using React.js and Graphql that can be used to search all the countries and show the details.
 
+![Desktop view](https://github.com/aswathysaji/Country-Lister/blob/main/country1.png?raw=true)
 ![Desktop view](https://github.com/aswathysaji/Country-Lister/blob/main/country.png?raw=true)
 
 ## Available Scripts
