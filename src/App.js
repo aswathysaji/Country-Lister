@@ -33,10 +33,10 @@ function App() {
     name: "",
     code: "",
     native: "",
-    emoji: "",
-    emojiU: "",
     currency: "",
     phone: "",
+    emoji: "",
+    emojiU: "",
     languages: [{ code: "", name: "" }],
   });
 
