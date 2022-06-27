@@ -34,6 +34,7 @@ const COUNTRY_DETAILS = `
 
 function App() {
   const [countrydropdown, setCountryDropdown] = React.useState([]);
+  const [loading, setloading] = React.useState(false);
   const [country, setCountry] = React.useState();
   const [details, setDetails] = React.useState({
     name: "",
@@ -45,6 +46,11 @@ function App() {
     emojiU: "",
     languages: [{ code: "", name: "" }],
   });
+
+  function getDetails(data) {
+    setDetails(data.data.country);
+    setloading(true);
+  }
 
   //fetching the names of the countries from the graphql api using first query
 
@@ -70,7 +76,7 @@ function App() {
       }),
     })
       .then((response) => response.json())
-      .then((data) => setDetails(data.data.country));
+      .then((data) => getDetails(data));
   }, [country]);
 
 
@@ -88,18 +94,25 @@ function App() {
             </option>
           ))}
       </select>
-      <div className='card'>
-        <h3><span>Name : </span>{details.name}</h3>
-        <h3><span>Code : </span>{country}</h3>
-        <h3><span>Currency : </span>{details.currency}</h3>
-        <h3><span>Native : </span>{details.native}</h3>
-        <h3><span>Phone : </span>{details.phone}</h3>
-        <h3><span>Emoji : </span>{details.emoji}</h3>
-        <h3><span>EmojiU : </span>{details.emojiU}</h3>
-        <h3><span>Languages : </span></h3>
-        {details.languages.map((lang) => (
-          <h3>{lang.name}</h3>
-        ))}
+      <div>
+          { loading ? (
+            <div className='card'>
+            <h6><span>Name : </span>{details.name}</h6>
+            <h6><span>Code : </span>{country}</h6>
+            <h6><span>Currency : </span>{details.currency}</h6>
+            <h6><span>Native : </span>{details.native}</h6>
+            <h6><span>Phone : </span>{details.phone}</h6>
+            <h6><span>Emoji : </span>{details.emoji}</h6>
+            <h6><span>EmojiU : </span>{details.emojiU}</h6>
+            <h6><span>Languages : </span></h6>
+            {details.languages.map((lang) => (
+              <h6>{lang.name}</h6>
+            ))}
+          </div>
+          ) : (
+            <h6></h6>
+          )
+        }
       </div>
       <footer>
         Developed By Aswathy Saji 
