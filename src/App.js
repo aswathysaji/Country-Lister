@@ -1,5 +1,5 @@
 import './App.css';
-import React from "react";
+import React, { useState , useEffect } from "react";
 import 'bootstrap/dist/css/bootstrap.css';
 
 //query to get the names of all the countries
@@ -33,10 +33,10 @@ const COUNTRY_DETAILS = `
 
 
 function App() {
-  const [countrydropdown, setCountryDropdown] = React.useState([]);
-  const [loading, setloading] = React.useState(false);
-  const [country, setCountry] = React.useState();
-  const [details, setDetails] = React.useState({
+  const [countries, setCountries] = useState([]);
+  const [loading, setloading] = useState(false);
+  const [country, setCountry] = useState();
+  const [details, setDetails] = useState({
     name: "",
     code: "",
     native: "",
@@ -54,20 +54,20 @@ function App() {
 
   //fetching the names of the countries from the graphql api using first query
 
-  React.useEffect(() => {
+  useEffect(() => {
     fetch("https://countries.trevorblades.com/graphql/", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ query: COUNTRY }),
     })
       .then((response) => response.json())
-      .then((data) => setCountryDropdown(data.data.countries));
-  }, []);
+      .then((data) => setCountries(data.data.countries));
+  });
 
   //fetching the details of a country from the graphql api using second query
 
-  React.useEffect(() => {
-    fetch("https://countries.trevorblades.com/graphql/", {
+  useEffect(() => {
+    fetch("https://countries.trevorblades.com/graphql", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -88,7 +88,7 @@ function App() {
         onChange={(event) => setCountry(event.target.value)}
       >
         <option>--Select Country--</option>
-          {countrydropdown.map((country) => (
+          {countries.map((country) => (
             <option key={country.code} value={country.code}>
               {country.name}
             </option>
