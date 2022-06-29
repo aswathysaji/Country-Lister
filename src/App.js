@@ -47,10 +47,6 @@ function App() {
     languages: [{ code: "", name: "" }],
   });
 
-  function getDetails(data) {
-    setDetails(data.data.country);
-    setloading(true);
-  }
 
   //fetching the names of the countries from the graphql api using first query
 
@@ -63,7 +59,6 @@ function App() {
       .then((response) => response.json())
       .then((data) => setCountries(data.data.countries));
   });
-
   //fetching the details of a country from the graphql api using second query
 
   useEffect(() => {
@@ -76,7 +71,8 @@ function App() {
       }),
     })
       .then((response) => response.json())
-      .then((data) => getDetails(data));
+      .then((data) => setDetails(data.data.country))
+      .then(() => setloading(true));
   }, [country]);
 
 
@@ -97,20 +93,22 @@ function App() {
       <div>
           { loading ? (
             <div className='card'>
-            <h6><span>Name : </span>{details.name}</h6>
-            <h6><span>Code : </span>{country}</h6>
-            <h6><span>Currency : </span>{details.currency}</h6>
-            <h6><span>Native : </span>{details.native}</h6>
-            <h6><span>Phone : </span>{details.phone}</h6>
-            <h6><span>Emoji : </span>{details.emoji}</h6>
-            <h6><span>EmojiU : </span>{details.emojiU}</h6>
-            <h6><span>Languages : </span></h6>
-            {details.languages.map((lang) => (
-              <h6>{lang.name}</h6>
-            ))}
+              <h6><span>Name : </span>{details.name}</h6>
+              <h6><span>Code : </span>{details.code}</h6>
+              <h6><span>Currency : </span>{details.currency}</h6>
+              <h6><span>Native : </span>{details.native}</h6>
+              <h6><span>Phone : </span>{details.phone}</h6>
+              <h6><span>Emoji : </span>{details.emoji}</h6>
+              <h6><span>EmojiU : </span>{details.emojiU}</h6>
+              <h6><span>Languages : </span></h6>
+              {details.languages.map((lang) => (
+                <h6>{lang.name}</h6>
+              ))}
           </div>
           ) : (
-            <h6></h6>
+            <div className='card'>
+              <h6>Search your country. The details will be displayed here!!</h6>
+            </div>
           )
         }
       </div>
